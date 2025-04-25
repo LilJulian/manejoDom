@@ -1,3 +1,6 @@
+
+import { validacion } from "./module.js";
+
 //Variables
 const formulario = document.querySelector('form')
 const nombre = document.querySelector('[name="nombre"]');
@@ -6,7 +9,9 @@ const telefono = document.querySelector('[name="telefono"]');
 const number = document.querySelector('[name="number" ]');
 const usuario = document.querySelector('[name="usuario"]');
 const contrasena = document.querySelector('[name="password"]');
-// const btn = document.querySelector('#btn_validar');
+const btn = document.querySelector('#btn_validar');
+const politica = document.querySelector('#politica')
+
 
 //Condiciones
 
@@ -19,55 +24,105 @@ const contraSegura = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}$/;
 
 const validar = (event) => {
   event.preventDefault();
-  if (!letras.test(nombre.value)) {
-    if (nombre.value == "") {
-      alert("Llene ese nombre");
-    }else{
-      alert("Solo debe contener letras");
+
+  if (nombre.value == "") {
+    if (nombre.nextElementSibling) {
+      nombre.nextElementSibling.remove();
     }
-  nombre.focus();
+    nombre.classList.add('borde_rojo');
+    const mensaje = document.createElement('span');
+    mensaje.textContent = "Este campo debe ser obligatorio";
+    nombre.insertAdjacentElement('afterend', mensaje)
+    nombre.focus();
+
   }
-  if (!letras.test(apellido.value)) {
-      if (apellido.value == "") {
-        alert("Llene ese apellido");
-      }else{
-        alert("Solo debe contener letras");
-      }
-      apellido.focus();
-  }
-  if (!soloNumeros.test(telefono.value)) {
-    if (telefono.value == "") {
-      alert("Llene ese telefono");
-    }else{
-      alert("Solo debe contener numeros");
+
+  if (apellido.value == "") {
+    if (apellido.nextElementSibling) {
+      apellido.nextElementSibling.remove();
     }
-    telefono.focus();    
+    apellido.classList.add('borde_rojo');
+    const mensaje = document.createElement('span');
+    mensaje.textContent = "Este campo debe ser obligatorio";
+    apellido.insertAdjacentElement('afterend', mensaje)
+    apellido.focus();
   }
-  if (!soloNumeros.test(number.value)) {
-    if (number.value == "") {
-      alert("Llene ese numero");
-    }else{
-      alert("Solo debe contener numeros");
+
+  if (telefono.value == "") {
+    if (telefono.nextElementSibling) {
+      telefono.nextElementSibling.remove();
     }
-    number.focus();    
+    telefono.classList.add('borde_rojo');
+    const mensaje = document.createElement('span');
+    mensaje.textContent = "Este campo debe ser obligatorio";
+    telefono.insertAdjacentElement('afterend', mensaje)
+    telefono.focus();
   }
-  if (!userCondi.test(usuario.value)) {
-    if (usuario.value == "") {
-      alert("Llene ese usuario");
-    }else{
-      alert("Solo letras, números, guiones bajos o medios (3-17 caracteres)");
+
+  if (number.value == "") {
+    if (number.nextElementSibling) {
+      number.nextElementSibling.remove();
     }
-  usuario.focus();
+    number.classList.add('borde_rojo');
+    const mensaje = document.createElement('span');
+    mensaje.textContent = "Este campo debe ser obligatorio";
+    number.insertAdjacentElement('afterend', mensaje);
+    number.focus();
   }
-  if (!contraSegura.test(contrasena.value)) {
-    if (contrasena.value == "") {
-      alert("Llene esa contraseña");
-    }else{
-      alert("Debe incluir mayúsculas, números y símbolos (!@#$%^&*)");
+  if (usuario.value == "") {
+    if (usuario.nextElementSibling) {
+      usuario.nextElementSibling.remove();
     }
-  contrasena.focus();
+    usuario.classList.add('borde_rojo');
+    const mensaje = document.createElement('span');
+    mensaje.textContent = "Este campo debe ser obligatorio";
+    usuario.insertAdjacentElement('afterend', mensaje);
+    usuario.focus();
+  }
+  if (contrasena.value == "") {
+    if (contrasena.nextElementSibling) {
+      contrasena.nextElementSibling.remove();
+    }
+    contrasena.classList.add('borde_rojo');
+    const mensaje = document.createElement('span');
+    mensaje.textContent = "Este campo debe ser obligatorio";
+    contrasena.insertAdjacentElement('afterend', mensaje)
+    contrasena.focus();
   }
 }
 
+const limpiar = (event) => {
+  if (event.target.value !== "") {
+    event.target.classList.remove('borde_rojo');
+    if (event.target.nextElementSibling) {
+      event.target.nextElementSibling.remove();
+    }
+  }
+}
+
+
+
+
 //Eventos
-formulario.addEventListener('submit', validar);
+// addEventListener('keydown', (event) => {
+//   if (nombre.value.length > 5) {
+//     nombre.setAttribute('disabled', '')
+//   }
+// })
+
+// addEventListener('change', (event) => {
+//   if (!politica.checked) {
+//     btn.setAttribute('disabled', '');
+//   } else {
+//     btn.removeAttribute('disabled');
+//   }
+// })
+
+
+
+
+formulario.addEventListener('submit', validacion);
+// nombre.addEventListener('blur', limpiar);
+// apellido.addEventListener('blur', limpiar);
+
+
