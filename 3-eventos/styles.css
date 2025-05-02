@@ -131,6 +131,7 @@ select {
   outline: none;
   font-size: 1rem;
   color: var(--sycamore);
+
 }
 
 button {
@@ -175,4 +176,16 @@ button:hover {
 
 .borde_rojo {
   border: red 2px solid;
+}
+
+.radiolist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.checklist {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
 }
